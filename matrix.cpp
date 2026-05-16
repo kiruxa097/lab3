@@ -20,6 +20,7 @@ class Matrix : public vector<vector<T>> {
             arr_num.resize(line);
         }
 
+
         void find_max_v(){
 
             // Поиск максимального по модулю значения в строке - выбор ведущего элемента
@@ -41,11 +42,10 @@ class Matrix : public vector<vector<T>> {
 
             // Зануляем не ведущие элементы в столбцах
             for (int i = 0; i < line; i++) {
-                int lj = arr_num[i]-1;
-                int rj = arr_num[i]+1;
-                while (lj > 0) {
+                for (int j = 0; j < line-1; j++){
                     
                 }
             }
+
         }
 };
