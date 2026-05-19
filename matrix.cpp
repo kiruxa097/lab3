@@ -63,6 +63,7 @@ public:
         for (int i = 0; i < line; i++)
         {
             T t1 = max_values[i]; // умножаем это число на строку, в которой будем занулять элемент
+            if (t1 == 0) continue;
             for (int j = i + 1; j < line; j++)
             {
                 T t2 = (*this)[j][arr_num[i]]; // умножаем это число на строку, которую будем вычитать
@@ -111,7 +112,7 @@ public:
         {
             return (*this).at(i);
         }
-        catch (const out_of_range &e)
+        catch (const out_of_range& e)
         {
             cout << "Index out of range: " << e.what() << endl;
             return vector<T>();
@@ -124,13 +125,32 @@ public:
         for (int i = 0; i < line; i++)
         {
             T d = (*this)[i][arr_num[i]];
-            cout << "x" << arr_num[i] + 1 << " = " << (*this)[i][col - 1] / d;
+            int k = 0;
             for (int j = 0; j < col - 1; j++)
             {
-                if ((*this)[i][j] != 0 && j != arr_num[i])
-                {
-                    cout << "-(" << (*this)[i][j] / d << ")" << "*x" << j + 1 << "";
+                if ((*this)[i][j] == 0) { k += 1; }
+            }
+            if (k == col - 1 && (*this)[i][col - 1] != 0) {
+                cout << "Reshenia ne syshestvyet";
+                cout << endl;
+            }
+            if (k != col && max_values[i] != 0) {
+                if (d == 0) {
+                    cout << "Delenie na nol";
+                    cout << endl;
+                    continue;
                 }
+                cout << "x" << arr_num[i] + 1 << " = " << (*this)[i][col - 1] / d;
+                for (int j = 0; j < col - 1; j++)
+                {
+                    if ((*this)[i][j] != 0 && j != arr_num[i])
+                    {
+                        cout << "-(" << (*this)[i][j] / d << ")" << "*x" << j + 1 << "";
+                    }
+                }
+            }
+            else {
+                cout << "This line is dependent";
             }
             cout << endl;
         }
